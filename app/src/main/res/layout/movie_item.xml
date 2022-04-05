@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/imageView"
         android:fontFamily="sans-serif-light"
+        android:layout_marginLeft="2dp"
         android:text="Title"
         android:textColor="@color/black" />
 
@@ -29,6 +30,7 @@
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/imageView"
+        android:layout_marginLeft="2dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="-40dp"
         android:text="Genre" />

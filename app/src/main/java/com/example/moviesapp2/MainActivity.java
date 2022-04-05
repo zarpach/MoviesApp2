@@ -1,6 +1,7 @@
 package com.example.moviesapp2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,4 +48,6 @@ public class MainActivity extends AppCompatActivity implements NewAdapter.OnMovi
         Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
     }
+
+
 }
