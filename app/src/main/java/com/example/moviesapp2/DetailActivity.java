@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,5 +31,9 @@ public class DetailActivity extends AppCompatActivity {
         Title.setText(getIntent().getStringExtra("Title"));
         Genre.setText(getIntent().getStringExtra("Genre"));
         Rating.setText(getIntent().getStringExtra("Rating"));
+    }
+
+    public void getBack(View view){
+        onBackPressed();
     }
 }

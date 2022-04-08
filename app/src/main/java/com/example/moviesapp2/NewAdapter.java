@@ -1,21 +1,39 @@
 package com.example.moviesapp2;
 
+import static android.content.ContentValues.TAG;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 
-public class NewAdapter extends RecyclerView.Adapter<NewViewHolder>{
+public class NewAdapter extends RecyclerView.Adapter<NewViewHolder> {
 
     Context context;
-    List<Item> items;
+    private final List<Item> items;
+    List<Item> itemsAll;
     private NewAdapter.OnMovieListener mOnMovieListener;
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void setFilteredList(List<Item> newList){
+        this.items.addAll(newList);
+        notifyDataSetChanged();
+    }
+
 
     public NewAdapter(Context context, List<Item> items, NewAdapter.OnMovieListener onMovieListener) {
         this.context = context;
@@ -65,12 +83,9 @@ public class NewAdapter extends RecyclerView.Adapter<NewViewHolder>{
         return items.toArray().length;
     }
 
+
     public interface OnMovieListener{
         void onMovieClick(int position);
     }
 
-    public void filterList(List<Item> filteredList){
-        items = filteredList;
-        notifyDataSetChanged();
-    }
 }

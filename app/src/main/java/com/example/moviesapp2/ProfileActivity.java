@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.Toast;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -36,6 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.frameview, f1);
         ft.commit();
+        Toast.makeText(this, "About Eraaly", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -44,5 +47,6 @@ public class ProfileActivity extends AppCompatActivity {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.frameview, f2);
         ft.commit();
+        Toast.makeText(this, "About Chyngyz", Toast.LENGTH_SHORT).show();
     }
 }
