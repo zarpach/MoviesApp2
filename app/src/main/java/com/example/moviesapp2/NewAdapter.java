@@ -21,35 +21,24 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
-public class NewAdapter extends RecyclerView.Adapter<NewViewHolder> {
+public class NewAdapter extends RecyclerView.Adapter<NewViewHolder> implements Filterable{
 
     Context context;
-    private final List<Item> items;
-    List<Item> itemsAll;
-    private NewAdapter.OnMovieListener mOnMovieListener;
+    ArrayList<Item> items;
+    ArrayList<Item> backup;
 
-    @SuppressLint("NotifyDataSetChanged")
-    public void setFilteredList(List<Item> newList){
-        this.items.addAll(newList);
-        notifyDataSetChanged();
-    }
-
-
-    public NewAdapter(Context context, List<Item> items, NewAdapter.OnMovieListener onMovieListener) {
-        this.context = context;
+    public NewAdapter(Context context, ArrayList<Item> items) {
         this.items = items;
-        this.mOnMovieListener = onMovieListener;
+        this.context = context;
+        backup = new ArrayList<>(items);
     }
-
-//    public NewAdapter(Context applicationContext, List<Item> items, MainActivity mainActivity) {
-//        this.items = items;
-//    }
 
     @NonNull
     @Override
     public NewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.movie_item, parent, false);
-        return new NewViewHolder(view, mOnMovieListener);
+        LayoutInflater inflater=LayoutInflater.from(parent.getContext());
+        View view = inflater.inflate(R.layout.movie_item, parent, false);
+        return new NewViewHolder(view);
     }
 
     @Override
@@ -83,9 +72,37 @@ public class NewAdapter extends RecyclerView.Adapter<NewViewHolder> {
         return items.toArray().length;
     }
 
-
-    public interface OnMovieListener{
-        void onMovieClick(int position);
+    @Override
+    public Filter getFilter() {
+        return itemsFilter;
     }
 
+    Filter itemsFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence keyword) {
+            ArrayList<Item> filteredList = new ArrayList<>();
+
+            if (keyword.toString().isEmpty())
+                filteredList.addAll(backup);
+            else {
+                for (Item item : backup)
+                {
+                    if (item.getTitle().toString().toLowerCase().contains(keyword.toString().toLowerCase()))
+                        filteredList.add(item);
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            results.count = filteredList.size();
+            return results;
+        }
+
+            @Override
+            protected void publishResults (CharSequence charSequence, FilterResults filterResults){
+                items.clear();
+                items.addAll((ArrayList<Item>)filterResults.values);
+                notifyDataSetChanged();
+            }
+        };
 }

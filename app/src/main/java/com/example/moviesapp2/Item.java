@@ -1,17 +1,11 @@
 package com.example.moviesapp2;
 
 public class Item {
-    String title;
-    String genre;
-    int image;
-    String rating;
+    private String title;
+    private String genre;
+    private int image;
+    private String rating;
 
-    public Item(String title, String genre, String rating, int image) {
-        this.title = title;
-        this.genre = genre;
-        this.image = image;
-        this.rating = rating;
-    }
 
     public String getTitle() {
         return title;
