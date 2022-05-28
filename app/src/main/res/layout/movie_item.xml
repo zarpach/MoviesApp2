@@ -44,6 +44,7 @@
         android:background="@color/black"
         android:fontFamily="sans-serif-light"
         android:text="Rating"
+        android:foreground="@drawable/rounded"
         android:textAlignment="center"
         android:textColor="@color/white" />
 

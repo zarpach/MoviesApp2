@@ -6,6 +6,16 @@ public class Item {
     private int image;
     private String rating;
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    private String description;
+
 
     public String getTitle() {
         return title;

@@ -12,6 +12,7 @@ public class NewViewHolder extends RecyclerView.ViewHolder {
     TextView Title;
     TextView Genre;
     TextView Rating;
+    TextView description;
 
     public NewViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -19,5 +20,6 @@ public class NewViewHolder extends RecyclerView.ViewHolder {
         Title = itemView.findViewById(R.id.title);
         Genre = itemView.findViewById(R.id.genre);
         Rating = itemView.findViewById(R.id.rating);
+        description = itemView.findViewById(R.id.description);
     }
 }

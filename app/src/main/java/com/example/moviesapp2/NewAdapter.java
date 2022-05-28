@@ -50,8 +50,6 @@ public class NewAdapter extends RecyclerView.Adapter<NewViewHolder> implements F
         holder.Rating.setText(items.get(position).getRating());
         holder.imgView.setImageResource(items.get(position).getImage());
 
-
-
         holder.imgView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,6 +58,7 @@ public class NewAdapter extends RecyclerView.Adapter<NewViewHolder> implements F
                 intent.putExtra("Genre", temp.getGenre());
                 intent.putExtra("Rating", temp.getRating());
                 intent.putExtra("Image", temp.getImage());
+                intent.putExtra("Description", temp.getDescription());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                 context.startActivity(intent);
