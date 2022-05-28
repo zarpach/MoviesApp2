@@ -15,6 +15,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -27,10 +30,16 @@ public class MainActivity extends AppCompatActivity{
     NewAdapter newAdapter;
     SearchView searchView;
 
+    Button web;
+
+    private Animation buttonAnim;
+    private Button bAnim;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        init();
 
         searchView = findViewById(R.id.searchview);
 
@@ -51,6 +60,26 @@ public class MainActivity extends AppCompatActivity{
         newAdapter = new NewAdapter(getApplicationContext(), dataqueue());
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(newAdapter);
+
+        web=(Button)findViewById(R.id.web_button);
+        web.setOnClickListener(v -> {
+            Intent web = new Intent(getApplicationContext(), WebActivity2.class);
+            startActivity(web);
+        });
+
+
+    }
+
+    private void init(){
+
+        buttonAnim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.kinopoisk_anim);
+
+        bAnim = findViewById(R.id.web_button);
+
+        bAnim.startAnimation(buttonAnim);
+
+
+
     }
 
     public ArrayList<Item> dataqueue(){
@@ -133,4 +162,6 @@ public class MainActivity extends AppCompatActivity{
         Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
     }
+
+
 }
