@@ -4,7 +4,7 @@ public class Item {
     private String title;
     private String genre;
     private int image;
-    private String rating;
+    private double rating;
 
     public String getDescription() {
         return description;
@@ -41,11 +41,11 @@ public class Item {
         this.image = image;
     }
 
-    public String getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 }

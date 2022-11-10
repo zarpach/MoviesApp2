@@ -23,7 +23,7 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.detail);
         imgView = (ImageView)findViewById(R.id.movieImage);
         Genre = (TextView)findViewById(R.id.genreView);
-        Rating = (TextView)findViewById(R.id.ratingView);
+        Rating = (TextView)findViewById(R.id.detailRatingView);
         Title = (TextView)findViewById(R.id.titleView);
         Description = (TextView)findViewById(R.id.description);
 

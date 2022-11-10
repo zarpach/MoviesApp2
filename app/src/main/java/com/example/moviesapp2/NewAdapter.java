@@ -2,30 +2,32 @@ package com.example.moviesapp2;
 
 import static android.content.ContentValues.TAG;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.SearchView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Locale;
+
 
 public class NewAdapter extends RecyclerView.Adapter<NewViewHolder> implements Filterable{
 
     Context context;
     ArrayList<Item> items;
     ArrayList<Item> backup;
+    TextView ratingView;
+    View item;
+    double rating;
 
     public NewAdapter(Context context, ArrayList<Item> items) {
         this.items = items;
@@ -33,22 +35,40 @@ public class NewAdapter extends RecyclerView.Adapter<NewViewHolder> implements F
         backup = new ArrayList<>(items);
     }
 
+
     @NonNull
     @Override
     public NewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater=LayoutInflater.from(parent.getContext());
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.movie_item, parent, false);
         return new NewViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull NewViewHolder holder, int position) {
-        final Item temp=items.get(position);
 
+        final Item temp = items.get(position);
+        ratingView = holder.itemView.findViewById(R.id.ratingViewField);
+        NumberFormat nm = NumberFormat.getNumberInstance();
         holder.Title.setText(items.get(position).getTitle());
         holder.Genre.setText(items.get(position).getGenre());
-        holder.Rating.setText(items.get(position).getRating());
+        holder.Rating.setText(nm.format(items.get(position).getRating()));
         holder.imgView.setImageResource(items.get(position).getImage());
+
+
+        rating = items.get(position).getRating();
+        Log.i("Rating - " + rating, TAG);
+        if (rating > 7.0) {
+            ratingView.setBackgroundColor(Color.parseColor("#3BB33B"));
+        }
+        else if (rating >= 5 || rating < 7) {
+            ratingView.setBackgroundColor(Color.parseColor("#777777"));
+        }
+        else if (rating <= 4) {
+            ratingView.setBackgroundColor(Color.argb(100, 255, 0, 0));
+        }
+
 
         holder.imgView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +85,7 @@ public class NewAdapter extends RecyclerView.Adapter<NewViewHolder> implements F
             }
         });
     }
+
 
     @Override
     public int getItemCount() {
